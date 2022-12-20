@@ -1,0 +1,13 @@
+.game-platform-card {
+  border-radius: 40px;
+  width: 250px;
+  height: 140.625px;
+  object-fit: cover;
+  margin: 12px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+}
+
+.game-platform-card:hover {
+  filter: brightness(80%);
+}

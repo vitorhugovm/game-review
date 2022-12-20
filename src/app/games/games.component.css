@@ -1,0 +1,3 @@
+.game-image:hover {
+  filter: brightness(80%);
+}
