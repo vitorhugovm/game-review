@@ -52,6 +52,9 @@ export class ReviewsComponent {
     this.requester.post(`reviews/${this.gameId}`, body).subscribe({
       next: res => {
         if (res != null) {
+          this.newReview.nota = '';
+          this.newReview.autor = '';
+          this.newReview.review = '';
           this.getReviews();
         }
       },

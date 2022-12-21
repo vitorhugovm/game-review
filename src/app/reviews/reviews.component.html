@@ -5,13 +5,10 @@
   <p style="margin-left: 15px"><strong>Nota:</strong> {{jogo.nota}}/10</p>
   <mat-card-content class="text-center">
     <img class="game-image" [src]="jogo.imagem">
-    <div class="d-flex align-items-center">
-      <div class="card full-width" *ngFor="let review of reviews" style="margin-top: 15px;">
-        <div class="card-body" style="margin: 10px;">
-            <h5>{{review.autor}}</h5><h6><strong>Nota: {{review.nota}} / 10</strong></h6>
-            <p>{{review.review}}</p>
-        </div>
-        <br>
+    <div class="card" *ngFor="let review of reviews" style="margin-top: 15px;">
+      <div class="card-body" style="margin: 10px;">
+          <h5>{{review.autor}}</h5><h6><strong>Nota: {{review.nota}} / 10</strong></h6>
+          <p>{{review.review}}</p>
       </div>
     </div>
   </mat-card-content>
