@@ -1,3 +1,28 @@
+<div class="row" style="left: 15px; margin-top: 10px">
+  <div class="col-md-6">
+    <mat-form-field class="full-width">
+      <mat-label> Buscar jogos </mat-label>
+      <input matInput [(ngModel)]="search">
+    </mat-form-field>
+  </div>
+  <div class="col-md-3">
+    <mat-form-field class="full-width">
+      <label for="nota"><strong>Tipo de Busca</strong></label><br>
+      <mat-select [(ngModel)]="searchType">
+        <mat-option value="nome">Título</mat-option>
+        <mat-option value="genero">Gênero</mat-option>
+        <mat-option value="desenvolvedor">Desenvolvedor</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-3">
+    <button class="full-width height-50" [ngClass]="(!searchType || !search) ? '' : 'search-game-button'" #save
+    mat-raised-button (click)="searchGames()" [disabled]="!searchType || !search">
+      <mat-icon style="color: white !important;">search</mat-icon> Buscar Jogos
+    </button>
+  </div>
+</div>
+
 <mat-card class="box box" *ngFor="let jogo of jogos">
   <mat-card-header>
     <mat-card-title style="cursor: pointer;" [routerLink]="jogo.id"> {{jogo.nome}} </mat-card-title>

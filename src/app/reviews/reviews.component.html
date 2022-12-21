@@ -25,7 +25,7 @@
       <div class="col-md-4">
         <mat-form-field class="full-width">
           <label for="nota"><strong>Nota:</strong></label><br>
-          <mat-select [(ngModel)]="newReview.nota" value="0">
+          <mat-select id="nota" [(ngModel)]="newReview.nota" value="0">
             <mat-option value="0">0</mat-option>
             <mat-option value="1">1</mat-option>
             <mat-option value="2">2</mat-option>
@@ -40,8 +40,15 @@
           </mat-select>
         </mat-form-field>
       </div>
+      <div class="col-md-11" style="margin: 15px;">
+        <mat-form-field class="full-width">
+          <label for="nome"><strong>Insira seu nome</strong></label><br>
+          <input id="nome" matInput [(ngModel)]="newReview.autor">
+        </mat-form-field>
+      </div>
     </div>
-    <button [ngClass]="create.disabled ? '' : 'create-review-button'" #create mat-stroked-button (click)="createReview()" [disabled]="!newReview.nota || !newReview.review">
+    <button [ngClass]="(!newReview.nota || !newReview.review || !newReview.autor) ? '' : 'create-review-button'"
+    #create mat-stroked-button (click)="createReview()" [disabled]="!newReview.nota || !newReview.review || !newReview.autor">
       <mat-icon style="color: white !important;">add</mat-icon><strong>Enviar Review</strong>
     </button>
 </mat-card>

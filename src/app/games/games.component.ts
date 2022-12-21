@@ -9,6 +9,8 @@ import { RequesterService } from '../services/requester.service';
 })
 export class GamesComponent {
 
+  search = '';
+  searchType = 'nome';
   platform: any = '';
   jogos: any = [];
 
@@ -39,6 +41,16 @@ export class GamesComponent {
       error: error => console.log(error),
       complete: () => {}
     })
+  }
+
+  searchGames(): void {
+    this.requester.get(`search/${this.searchType}/${this.search}`).subscribe({
+      next: res => {
+        this.jogos = res;
+      },
+      error: error => alert(error),
+      complete: () => {}
+    });
   }
 
 }

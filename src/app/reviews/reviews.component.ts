@@ -45,7 +45,7 @@ export class ReviewsComponent {
 
   createReview(): void {
     let body: any = {};
-    body['autor'] = this.user.nome;
+    body['autor'] = this.newReview.autor;
     body['nota'] = this.newReview.nota;
     body['review'] = this.newReview.review;
 
