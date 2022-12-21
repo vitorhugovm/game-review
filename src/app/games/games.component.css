@@ -1,3 +1,7 @@
 .game-image:hover {
   filter: brightness(80%);
 }
+
+mat-card-title:hover {
+  text-decoration: underline;
+}

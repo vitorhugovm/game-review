@@ -10,7 +10,7 @@ import { RequesterService } from '../services/requester.service';
 export class GamesComponent {
 
   platform: any = '';
-  jogos: any = {};
+  jogos: any = [];
 
   constructor(
     private requester: RequesterService,
@@ -20,7 +20,7 @@ export class GamesComponent {
 
   ngOnInit() {
     this.platform = this.route.snapshot.paramMap.get('platform');
-    if (this.platform != 'ps4' && this.platform != 'xbox' && this.platform != 'switch' && this.platform != 'pc')
+    if (this.platform != 'PS4' && this.platform != 'Xbox' && this.platform != 'Switch' && this.platform != 'PC')
       this.router.navigate(['/home']);
     this.findGames();
   }
@@ -28,8 +28,13 @@ export class GamesComponent {
   findGames(): void {
     this.requester.get(`platforms/${this.platform}`).subscribe({
       next: res => {
-        this.jogos = res;
-        console.log(res);
+        this.jogos = res.sort(function (a: any, b: any) {
+          if (a.nota < b.nota)
+            return 1;
+          if (a.nota > b.nota)
+            return -1;
+          return 0;
+        });
       },
       error: error => console.log(error),
       complete: () => {}

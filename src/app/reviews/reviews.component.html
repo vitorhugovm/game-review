@@ -2,10 +2,11 @@
   <mat-card-header>
     <mat-card-title> {{jogo.nome}} </mat-card-title>
   </mat-card-header>
+  <p style="margin-left: 15px"><strong>Nota:</strong> {{jogo.nota}}/10</p>
   <mat-card-content class="text-center">
     <img class="game-image" [src]="jogo.imagem">
     <div class="d-flex align-items-center">
-      <div class="card" *ngFor="let review of jogo.reviews" style="margin-top: 15px;">
+      <div class="card" *ngFor="let review of reviews" style="margin-top: 15px;">
         <div class="card-body">
           <div class="col-md-4">
             <h5>{{review.autor}}</h5><h6><strong>Nota: {{review.nota}} / 10</strong></h6>
@@ -17,18 +18,30 @@
   </mat-card-content>
     <hr>
     <div class="row">
-      <div class="col-md-7">
-        <mat-form-field class="full-width">
-          <label for="review"><strong>Escreva uma review:</strong></label><br>
-          <textarea id="review" cols="30"></textarea>
-        </mat-form-field>
+      <div class="col-md-7" style="margin-left: 10px;">
+        <label for="review"><strong>Escreva uma review:</strong></label><br>
+        <textarea class="full-width" id="review" [(ngModel)]="newReview.review" cols="30" maxlength="300"></textarea>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-4">
         <mat-form-field class="full-width">
-          <label for="nota"><strong>Dê uma nota:</strong></label><br>
-          <input matInput value="0" id="nota" type="number" min="0" max="10">
+          <label for="nota"><strong>Nota:</strong></label><br>
+          <mat-select [(ngModel)]="newReview.nota" value="0">
+            <mat-option value="0">0</mat-option>
+            <mat-option value="1">1</mat-option>
+            <mat-option value="2">2</mat-option>
+            <mat-option value="3">3</mat-option>
+            <mat-option value="4">4</mat-option>
+            <mat-option value="5">5</mat-option>
+            <mat-option value="6">6</mat-option>
+            <mat-option value="7">7</mat-option>
+            <mat-option value="8">8</mat-option>
+            <mat-option value="9">9</mat-option>
+            <mat-option value="10">10</mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
     </div>
-    <button mat-stroked-button><strong>Enviar Review</strong></button>
+    <button [ngClass]="create.disabled ? '' : 'create-review-button'" #create mat-stroked-button (click)="createReview()" [disabled]="!newReview.nota || !newReview.review">
+      <mat-icon style="color: white !important;">add</mat-icon><strong>Enviar Review</strong>
+    </button>
 </mat-card>

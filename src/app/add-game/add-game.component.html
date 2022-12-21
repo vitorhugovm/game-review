@@ -1,0 +1,81 @@
+<mat-card class="d-flex justify-content-center" style="width: 100%;">
+  <mat-card-header>
+    <mat-card-title> Adicionar Jogo </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-md-3">
+        <mat-form-field class="full-width">
+          <mat-label> Título </mat-label>
+          <input matInput [(ngModel)]="newGame.nome">
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="full-width">
+          <mat-label> Desenvolvedor </mat-label>
+          <input matInput [(ngModel)]="newGame.desenvolvedor">
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="full-width">
+          <mat-label> Gênero </mat-label>
+            <mat-select [(ngModel)]="newGame.genero">
+              <mat-option value="Ação">Ação</mat-option>
+              <mat-option value="Aventura">Aventura</mat-option>
+              <mat-option value="Estratégia">Estratégia</mat-option>
+              <mat-option value="RPG">RPG</mat-option>
+              <mat-option value="Esporte">Esporte</mat-option>
+              <mat-option value="Simulação">Simulação</mat-option>
+            </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="full-width">
+          <mat-label> Plataforma </mat-label>
+            <mat-select [(ngModel)]="newGame.plataforma">
+              <mat-option value="PS4">PlayStation 4</mat-option>
+              <mat-option value="Xbox">Xbox</mat-option>
+              <mat-option value="Switch">Nintendo Switch</mat-option>
+              <mat-option value="PC">PC</mat-option>
+            </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-10">
+        <label for="review"><strong>Resumo</strong></label><br>
+        <textarea class="full-width" id="review" [(ngModel)]="newGame.resumo" cols="30" maxlength="300"></textarea>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field class="full-width">
+          <label for="nota"><strong>Nota:</strong></label><br>
+          <mat-select [(ngModel)]="newGame.nota" value="0">
+            <mat-option value="0">0</mat-option>
+            <mat-option value="1">1</mat-option>
+            <mat-option value="2">2</mat-option>
+            <mat-option value="3">3</mat-option>
+            <mat-option value="4">4</mat-option>
+            <mat-option value="5">5</mat-option>
+            <mat-option value="6">6</mat-option>
+            <mat-option value="7">7</mat-option>
+            <mat-option value="8">8</mat-option>
+            <mat-option value="9">9</mat-option>
+            <mat-option value="10">10</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-8">
+        <mat-form-field class="full-width">
+          <mat-label> URL da Imagem </mat-label>
+          <input matInput [(ngModel)]="newGame.imagem">
+        </mat-form-field>
+      </div>
+      <div class="col-md-3 d-flex justify-content-end">
+        <img class="add-game-image" *ngIf="newGame.imagem != ''" [src]="newGame.imagem">
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="d-flex justify-content-center">
+    <button [ngClass]="create.disabled ? '' : 'create-game-button'" #create mat-raised-button (click)="createGame()" [disabled]="disableSave()">
+      <mat-icon style="color: white !important;">save</mat-icon> Salvar Jogo
+    </button>
+  </mat-card-actions>
+</mat-card>

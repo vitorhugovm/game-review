@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { RequesterService } from '../services/requester.service';
 
 @Component({
   selector: 'app-reviews',
@@ -8,33 +9,63 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ReviewsComponent {
 
+  user: any = {
+    nome: 'Vítor Hugo'
+  };
   platform: any = '';
-  newReview: string = '';
-  jogo = {
-    id: '0',
-    nome: 'God of War (2018)',
-    resumo: 'É um novo começo para kratos. Vivendo como um homem longe da sombra dos deuses, ele se aventura pelas selvagens florestas nórdicas com seu filho atreus, lutando para cumprir uma missão profundamente pessoal.',
-    desenvolvedor: 'Santa Monica Studio',
-    genero: 'Ação e Aventura',
-    imagem: 'https://cdn1.epicgames.com/offer/3ddd6a590da64e3686042d108968a6b2/EGS_GodofWar_SantaMonicaStudio_S2_1200x1600-fbdf3cbc2980749091d52751ffabb7b7_1200x1600-fbdf3cbc2980749091d52751ffabb7b7',
-    reviews: [
-      {
-        autor: 'Vítor Hugo',
-        nota: 10,
-        review: 'God of War é o melhor jogo que já joguei na vida!'
-      }
-    ]
-  }
+  gameId: any = '';
+  newReview: any = {
+    review: '',
+    nota: 0
+  };
+  reviews: any = [];
+  jogo: any = {};
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private requester: RequesterService
+  ) {}
 
   ngOnInit(): void {
     this.platform = this.route.snapshot.paramMap.get('platform');
-    this.getReviews(this.route.snapshot.paramMap.get('id'));
+    this.gameId = this.route.snapshot.paramMap.get('id');
+    this.getReviews();
+    this.getGame();
   }
 
-  getReviews(id: any): void {
-    return;
+  getReviews(): void {
+    this.requester.get(`reviews/${this.gameId}`).subscribe({
+      next: res => {
+        this.reviews = res;
+      },
+      error: error => console.log(error),
+      complete: () => {}
+    })
+  }
+
+  createReview(): void {
+    let body: any = {};
+    body['autor'] = this.user.nome;
+    body['nota'] = this.newReview.nota;
+    body['review'] = this.newReview.review;
+
+    this.requester.post(`reviews/${this.gameId}`, body).subscribe({
+      next: res => {
+        if (res != null) {
+          this.getReviews();
+        }
+      },
+      error: error => alert(error),
+      complete: () => {}
+    });
+  }
+
+  getGame(): void {
+    this.requester.get(`games/${this.gameId}`).subscribe({
+      next: res => this.jogo = res,
+      error: error => console.log(error),
+      complete: () => {}
+    });
   }
 
 }

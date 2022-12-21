@@ -15,28 +15,28 @@ export class RequesterService {
   constructor(private http: HttpClient) { }
 
   get(url: string): Observable<any> {
-    return this.http.get(this.baseUrl + url, httpOptions).pipe(
+    return this.http.get<any>(this.baseUrl + url, httpOptions).pipe(
       retry(2),
       catchError(error => { return error })
     );
   }
 
   post(url: string, body: any): Observable<any> {
-    return this.http.post(this.baseUrl + url, body, httpOptions).pipe(
+    return this.http.post<any>(this.baseUrl + url, body, httpOptions).pipe(
       retry(2),
       catchError(error => { return error })
     );
   }
 
   delete(url: any): Observable<any> {
-    return this.http.delete(this.baseUrl + url, httpOptions).pipe(
+    return this.http.delete<any>(this.baseUrl + url, httpOptions).pipe(
       retry(2),
       catchError(error => { return error })
     );
   }
 
   update(url: string, body: any): Observable<any> {
-    return this.http.put(this.baseUrl + url, body, httpOptions).pipe(
+    return this.http.put<any>(this.baseUrl + url, body, httpOptions).pipe(
       retry(2),
       catchError(error => { return error })
     );
